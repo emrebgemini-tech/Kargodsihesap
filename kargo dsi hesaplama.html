@@ -2,12 +2,23 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emre Bebe Toptan ve Emre Tekstil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Emre Bebe Kargo</title>
+    
+    <!-- UYGULAMA AYARLARI (PWA & MOBƒ∞L) -->
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Emre Bebe">
+
+    <!-- OTOMATƒ∞K LOGO (Harici dosyaya gerek yok, kodun i√ßine g√∂m√ºl√º) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20512%20512%27%3E%3Crect%20width%3D%27512%27%20height%3D%27512%27%20rx%3D%27120%27%20fill%3D%27%234f46e5%27%2F%3E%3Cpath%20d%3D%27M256%20100L400%20180L256%20260L112%20180L256%20100Z%27%20fill%3D%27%23ffffff%27%2F%3E%3Cpath%20d%3D%27M112%20200V340L240%20410V270L112%20200Z%27%20fill%3D%27%23e0e7ff%27%2F%3E%3Cpath%20d%3D%27M272%20270V410L400%20340V200L272%20270Z%27%20fill%3D%27%23c7d2fe%27%2F%3E%3C%2Fsvg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20512%20512%27%3E%3Crect%20width%3D%27512%27%20height%3D%27512%27%20rx%3D%27120%27%20fill%3D%27%234f46e5%27%2F%3E%3Cpath%20d%3D%27M256%20100L400%20180L256%20260L112%20180L256%20100Z%27%20fill%3D%27%23ffffff%27%2F%3E%3Cpath%20d%3D%27M112%20200V340L240%20410V270L112%20200Z%27%20fill%3D%27%23e0e7ff%27%2F%3E%3Cpath%20d%3D%27M272%20270V410L400%20340V200L272%20270Z%27%20fill%3D%27%23c7d2fe%27%2F%3E%3C%2Fsvg%3E">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
         .fade-in { animation: fadeIn 0.5s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .hidden-custom { display: none; }
@@ -17,37 +28,40 @@
             background: linear-gradient(135deg, #dcfce7 0%, #f0fdf4 100%);
             border: 1px solid #86efac;
         }
+        /* Mobil i√ßin input iyile≈ütirmesi */
+        input[type="number"] { font-size: 16px; } /* iOS zoom engelleme */
     </style>
 </head>
-<body class="bg-slate-100 min-h-screen py-8 px-4">
+<body class="bg-slate-100 min-h-screen py-8 px-4 select-none">
 
     <div class="max-w-md mx-auto">
         
-        <!-- Ba˛l˝k Kart˝ -->
+        <!-- Ba≈ülƒ±k Kartƒ± -->
         <div class="bg-indigo-600 text-white p-6 rounded-t-2xl shadow-lg flex justify-between items-center">
             <div class="flex-1">
                 <h1 class="text-xl font-bold flex flex-wrap items-center gap-2 leading-tight">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                    <!-- Kutu ƒ∞konu -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
                     Emre Bebe Toptan ve Emre Tekstil
                 </h1>
                 <p class="text-indigo-100 text-sm mt-2">Desi, Fiyat &amp; K&#226;r Analizi</p>
             </div>
         </div>
 
-        <!-- Ana ›Áerik -->
+        <!-- Ana ƒ∞√ßerik -->
         <div class="bg-white p-6 rounded-b-2xl shadow-lg">
             
-            <!-- Mod SeÁimi -->
+            <!-- Mod Se√ßimi -->
             <div class="flex bg-slate-100 p-1 rounded-lg mb-6">
-                <button id="btn-dimensions" onclick="setMode('dimensions')" class="flex-1 py-2 text-sm font-medium rounded-md transition-all bg-white text-indigo-600 shadow-sm">
+                <button id="btn-dimensions" onclick="setMode('dimensions')" class="flex-1 py-3 text-sm font-medium rounded-md transition-all bg-white text-indigo-600 shadow-sm active:scale-95">
                     &#214;l&#231;&#252; Gir (En/Boy/Y&#252;k)
                 </button>
-                <button id="btn-manual" onclick="setMode('manual')" class="flex-1 py-2 text-sm font-medium rounded-md transition-all text-slate-500 hover:text-slate-700">
+                <button id="btn-manual" onclick="setMode('manual')" class="flex-1 py-3 text-sm font-medium rounded-md transition-all text-slate-500 hover:text-slate-700 active:scale-95">
                     Desi Gir
                 </button>
             </div>
 
-            <!-- ÷lÁ¸ Giri˛ Alan˝ -->
+            <!-- √ñl√ß√º Giri≈ü Alanƒ± -->
             <div id="input-dimensions" class="space-y-4">
                 <div class="grid grid-cols-3 gap-3">
                     <div>
@@ -69,7 +83,7 @@
                 </p>
             </div>
 
-            <!-- Manuel Desi Giri˛ Alan˝ -->
+            <!-- Manuel Desi Giri≈ü Alanƒ± -->
             <div id="input-manual" class="hidden-custom">
                 <label class="block text-xs font-semibold text-slate-500 mb-1">Desi De&#287;eri</label>
                 <div class="relative">
@@ -80,10 +94,10 @@
                 </div>
             </div>
 
-            <!-- SonuÁ Alan˝ -->
+            <!-- Sonu√ß Alanƒ± -->
             <div id="result-area" class="hidden-custom mt-6 border-t border-dashed border-slate-300 pt-6 fade-in">
                 
-                <!-- ÷zet Bilgi -->
+                <!-- √ñzet Bilgi -->
                 <div class="flex justify-between items-center mb-4 bg-slate-50 p-3 rounded-lg border border-slate-200">
                     <span class="text-slate-600 font-medium text-sm">Hesaplanan Desi:</span>
                     <span class="text-indigo-900 font-bold text-lg">
@@ -91,7 +105,7 @@
                     </span>
                 </div>
 
-                <!-- Fiyat Detay˝ -->
+                <!-- Fiyat Detayƒ± -->
                 <div class="space-y-2">
                     <div class="flex justify-between text-slate-600 text-sm">
                         <span>Tarife (<span id="res-method">...</span>)</span>
@@ -110,7 +124,7 @@
                     </div>
                 </div>
 
-                <!-- AKILLI TASARRUF ANAL›Z› KUTUSU -->
+                <!-- AKILLI TASARRUF ANALƒ∞Zƒ∞ KUTUSU -->
                 <div id="savings-container" class="mt-6 hidden-custom fade-in">
                     <div class="savings-box p-4 rounded-xl flex gap-3 items-start shadow-sm">
                         <div class="bg-green-100 p-2 rounded-full shrink-0">
@@ -128,7 +142,7 @@
             </div>
 
             <!-- Temizle -->
-            <button id="btn-clear" onclick="clearAll()" class="hidden-custom w-full mt-6 py-2 text-slate-400 hover:text-red-500 text-sm flex items-center justify-center gap-2 transition-colors">
+            <button id="btn-clear" onclick="clearAll()" class="hidden-custom w-full mt-6 py-3 text-slate-400 hover:text-red-500 text-sm flex items-center justify-center gap-2 transition-colors active:scale-95">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12"/><path d="M3 3v9h9"/></svg>
                 S&#305;f&#305;rla
             </button>
@@ -157,7 +171,7 @@
     </div>
 
     <script>
-        // --- SAB›TLER ---
+        // --- SABƒ∞TLER ---
         const priceTable = [
             { min: 0, max: 0, price: 100.78 },
             { min: 1, max: 5, price: 106.39 },
@@ -184,13 +198,13 @@
             const manInput = document.getElementById('input-manual');
 
             if (mode === 'dimensions') {
-                dimBtn.className = "flex-1 py-2 text-sm font-medium rounded-md transition-all bg-white text-indigo-600 shadow-sm";
-                manBtn.className = "flex-1 py-2 text-sm font-medium rounded-md transition-all text-slate-500 hover:text-slate-700";
+                dimBtn.className = "flex-1 py-3 text-sm font-medium rounded-md transition-all bg-white text-indigo-600 shadow-sm active:scale-95";
+                manBtn.className = "flex-1 py-3 text-sm font-medium rounded-md transition-all text-slate-500 hover:text-slate-700 active:scale-95";
                 dimInput.style.display = 'block';
                 manInput.style.display = 'none';
             } else {
-                manBtn.className = "flex-1 py-2 text-sm font-medium rounded-md transition-all bg-white text-indigo-600 shadow-sm";
-                dimBtn.className = "flex-1 py-2 text-sm font-medium rounded-md transition-all text-slate-500 hover:text-slate-700";
+                manBtn.className = "flex-1 py-3 text-sm font-medium rounded-md transition-all bg-white text-indigo-600 shadow-sm active:scale-95";
+                dimBtn.className = "flex-1 py-3 text-sm font-medium rounded-md transition-all text-slate-500 hover:text-slate-700 active:scale-95";
                 dimInput.style.display = 'none';
                 manInput.style.display = 'block';
             }
@@ -257,7 +271,7 @@
             const vatAmount = basePrice * VAT_RATE;
             const totalPrice = basePrice + vatAmount;
 
-            // SonuÁlar˝ Yaz
+            // Sonu√ßlarƒ± Yaz
             document.getElementById('res-desi').innerText = finalDesi.toFixed(2);
             document.getElementById('res-method').innerText = method;
             document.getElementById('res-base').innerText = formatCurrency(basePrice);
@@ -266,7 +280,7 @@
 
             renderPriceTable(roundedDesi);
             
-            // --- TASARRUF ANAL›Z› (YEN› ÷ZELL›K) ---
+            // --- TASARRUF ANALƒ∞Zƒ∞ (YENƒ∞ √ñZELLƒ∞K) ---
             calculateSavings(roundedDesi, totalPrice);
         }
 
@@ -276,13 +290,13 @@
             let potentialPrice = 0;
             let hasSaving = false;
 
-            // Eer Desi 30'dan b¸y¸kse (Birim fiyatl˝ tarife)
+            // Eƒüer Desi 30'dan b√ºy√ºkse (Birim fiyatlƒ± tarife)
             if (currentRoundedDesi > 30) {
-                // 31+ Desi durumunda bir alt tam say˝ya (veya 30'a) d¸˛¸rmek
+                // 31+ Desi durumunda bir alt tam sayƒ±ya (veya 30'a) d√º≈ü√ºrmek
                 potentialDesi = currentRoundedDesi - 1;
                 
                 if (potentialDesi === 30) {
-                    // Sabit listeye geri d¸˛¸˛ (B¸y¸k tasarruf olabilir)
+                    // Sabit listeye geri d√º≈ü√º≈ü (B√ºy√ºk tasarruf olabilir)
                     potentialPrice = (priceTable[priceTable.length - 1].price) * (1 + VAT_RATE);
                 } else {
                     // Sadece 1 desi azaltma
@@ -290,17 +304,17 @@
                 }
                 hasSaving = true;
             } 
-            // Eer Desi 1-30 aras˝ndaysa (Liste tarifesi)
+            // Eƒüer Desi 1-30 arasƒ±ndaysa (Liste tarifesi)
             else if (currentRoundedDesi > 0) {
-                // Mevcut aral˝˝ bul
+                // Mevcut aralƒ±ƒüƒ± bul
                 const currentTierIndex = priceTable.findIndex(p => currentRoundedDesi >= p.min && currentRoundedDesi <= p.max);
                 
-                // Eer bir alt aral˝k varsa
+                // Eƒüer bir alt aralƒ±k varsa
                 if (currentTierIndex > 0) {
                     const lowerTier = priceTable[currentTierIndex - 1];
-                    potentialDesi = lowerTier.max; // Alt aral˝˝n tavan˝ (Hedefimiz)
+                    potentialDesi = lowerTier.max; // Alt aralƒ±ƒüƒ±n tavanƒ± (Hedefimiz)
                     
-                    // Alt aral˝˝n fiyat˝n˝ hesapla
+                    // Alt aralƒ±ƒüƒ±n fiyatƒ±nƒ± hesapla
                     potentialPrice = lowerTier.price * (1 + VAT_RATE);
                     hasSaving = true;
                 }
@@ -310,7 +324,7 @@
                 const diffAmount = currentTotalPrice - potentialPrice;
                 const diffDesi = (currentRoundedDesi - potentialDesi); // Basit fark
 
-                // Eer tasarruf kayda deerse gˆster (ˆrnein 1 TL ¸st¸)
+                // Eƒüer tasarruf kayda deƒüerse g√∂ster (√∂rneƒüin 1 TL √ºst√º)
                 if (diffAmount > 1) {
                     savingsContainer.style.display = 'block';
                     document.getElementById('save-desi-diff').innerText = diffDesi;
