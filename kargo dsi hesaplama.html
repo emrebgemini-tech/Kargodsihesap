@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emre Bebe Toptan ve Emre Tekstil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .hidden-custom { display: none; }
+        
+        /* Parlayan tasarruf kutusu efekti */
+        .savings-box {
+            background: linear-gradient(135deg, #dcfce7 0%, #f0fdf4 100%);
+            border: 1px solid #86efac;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen py-8 px-4">
+
+    <div class="max-w-md mx-auto">
+        
+        <!-- Baþlýk Kartý -->
+        <div class="bg-indigo-600 text-white p-6 rounded-t-2xl shadow-lg flex justify-between items-center">
+            <div class="flex-1">
+                <h1 class="text-xl font-bold flex flex-wrap items-center gap-2 leading-tight">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                    Emre Bebe Toptan ve Emre Tekstil
+                </h1>
+                <p class="text-indigo-100 text-sm mt-2">Desi, Fiyat &amp; K&#226;r Analizi</p>
+            </div>
+        </div>
+
+        <!-- Ana Ýçerik -->
+        <div class="bg-white p-6 rounded-b-2xl shadow-lg">
+            
+            <!-- Mod Seçimi -->
+            <div class="flex bg-slate-100 p-1 rounded-lg mb-6">
+                <button id="btn-dimensions" onclick="setMode('dimensions')" class="flex-1 py-2 text-sm font-medium rounded-md transition-all bg-white text-indigo-600 shadow-sm">
+                    &#214;l&#231;&#252; Gir (En/Boy/Y&#252;k)
+                </button>
+                <button id="btn-manual" onclick="setMode('manual')" class="flex-1 py-2 text-sm font-medium rounded-md transition-all text-slate-500 hover:text-slate-700">
+                    Desi Gir
+                </button>
+            </div>
+
+            <!-- Ölçü Giriþ Alaný -->
+            <div id="input-dimensions" class="space-y-4">
+                <div class="grid grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 mb-1">En (cm)</label>
+                        <input type="number" id="width" oninput="calculate()" placeholder="0" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none text-center font-bold text-slate-700">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 mb-1">Boy (cm)</label>
+                        <input type="number" id="length" oninput="calculate()" placeholder="0" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none text-center font-bold text-slate-700">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 mb-1">Y&#252;kseklik</label>
+                        <input type="number" id="height" oninput="calculate()" placeholder="0" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none text-center font-bold text-slate-700">
+                    </div>
+                </div>
+                <p class="text-xs text-slate-400 flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                    Form&#252;l: (En x Boy x Y&#252;kseklik) / 3000
+                </p>
+            </div>
+
+            <!-- Manuel Desi Giriþ Alaný -->
+            <div id="input-manual" class="hidden-custom">
+                <label class="block text-xs font-semibold text-slate-500 mb-1">Desi De&#287;eri</label>
+                <div class="relative">
+                    <input type="number" id="manualDesi" oninput="calculate()" placeholder="&#214;rn: 21" class="w-full p-3 pl-10 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none font-bold text-slate-700">
+                    <div class="absolute left-3 top-3.5 text-slate-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sonuç Alaný -->
+            <div id="result-area" class="hidden-custom mt-6 border-t border-dashed border-slate-300 pt-6 fade-in">
+                
+                <!-- Özet Bilgi -->
+                <div class="flex justify-between items-center mb-4 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                    <span class="text-slate-600 font-medium text-sm">Hesaplanan Desi:</span>
+                    <span class="text-indigo-900 font-bold text-lg">
+                        <span id="res-desi">0.00</span> <span class="text-xs font-normal text-indigo-600">DS</span>
+                    </span>
+                </div>
+
+                <!-- Fiyat Detayý -->
+                <div class="space-y-2">
+                    <div class="flex justify-between text-slate-600 text-sm">
+                        <span>Tarife (<span id="res-method">...</span>)</span>
+                        <span id="res-base">0.00 &#8378;</span>
+                    </div>
+                    <div class="flex justify-between text-slate-600 text-sm">
+                        <span>KDV (%20)</span>
+                        <span id="res-vat">0.00 &#8378;</span>
+                    </div>
+                    
+                    <div class="h-px bg-slate-200 my-2"></div>
+                    
+                    <div class="flex justify-between items-end">
+                        <span class="text-slate-800 font-bold text-lg">TOPLAM</span>
+                        <span class="text-slate-800 font-extrabold text-3xl" id="res-total">0.00 &#8378;</span>
+                    </div>
+                </div>
+
+                <!-- AKILLI TASARRUF ANALÝZÝ KUTUSU -->
+                <div id="savings-container" class="mt-6 hidden-custom fade-in">
+                    <div class="savings-box p-4 rounded-xl flex gap-3 items-start shadow-sm">
+                        <div class="bg-green-100 p-2 rounded-full shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-green-800 text-sm mb-1">K&#226;r F&#305;rsat&#305; Yakaland&#305;!</h4>
+                            <p class="text-sm text-green-700 leading-snug">
+                                Paketi <span id="save-desi-diff" class="font-bold text-green-900 underline">...</span> Desi k&#252;&#231;&#252;lt&#252;p <span id="save-target-desi" class="font-bold">...</span> Desi yaparsan&#305;z, tam <span id="save-amount" class="font-bold text-lg text-green-900 bg-white px-1 rounded">...</span> daha az &#246;dersiniz.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Temizle -->
+            <button id="btn-clear" onclick="clearAll()" class="hidden-custom w-full mt-6 py-2 text-slate-400 hover:text-red-500 text-sm flex items-center justify-center gap-2 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12"/><path d="M3 3v9h9"/></svg>
+                S&#305;f&#305;rla
+            </button>
+
+        </div>
+
+        <!-- Alt Liste -->
+        <div class="mt-4 bg-white rounded-xl shadow-sm p-4">
+            <h3 class="text-sm font-bold text-slate-700 mb-3 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                Fiyat Listesi
+            </h3>
+            <div class="overflow-hidden rounded-lg border border-slate-200 text-xs">
+                <table class="w-full text-left">
+                    <thead class="bg-slate-50 text-slate-500">
+                        <tr>
+                            <th class="p-2 font-semibold">KG/DS Aral&#305;&#287;&#305;</th>
+                            <th class="p-2 font-semibold text-right">Tutar (KDV'siz)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="price-table-body" class="divide-y divide-slate-100 text-slate-600"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- SABÝTLER ---
+        const priceTable = [
+            { min: 0, max: 0, price: 100.78 },
+            { min: 1, max: 5, price: 106.39 },
+            { min: 6, max: 10, price: 128.04 },
+            { min: 11, max: 15, price: 168.40 },
+            { min: 16, max: 20, price: 224.54 },
+            { min: 21, max: 25, price: 280.67 },
+            { min: 26, max: 30, price: 336.80 },
+        ];
+        
+        const OVER_30_UNIT_PRICE = 10.70;
+        const VAT_RATE = 0.20;
+        const DESI_DIVIDER = 3000;
+
+        let currentMode = 'dimensions'; 
+
+        window.onload = function() { renderPriceTable(); };
+
+        function setMode(mode) {
+            currentMode = mode;
+            const dimBtn = document.getElementById('btn-dimensions');
+            const manBtn = document.getElementById('btn-manual');
+            const dimInput = document.getElementById('input-dimensions');
+            const manInput = document.getElementById('input-manual');
+
+            if (mode === 'dimensions') {
+                dimBtn.className = "flex-1 py-2 text-sm font-medium rounded-md transition-all bg-white text-indigo-600 shadow-sm";
+                manBtn.className = "flex-1 py-2 text-sm font-medium rounded-md transition-all text-slate-500 hover:text-slate-700";
+                dimInput.style.display = 'block';
+                manInput.style.display = 'none';
+            } else {
+                manBtn.className = "flex-1 py-2 text-sm font-medium rounded-md transition-all bg-white text-indigo-600 shadow-sm";
+                dimBtn.className = "flex-1 py-2 text-sm font-medium rounded-md transition-all text-slate-500 hover:text-slate-700";
+                dimInput.style.display = 'none';
+                manInput.style.display = 'block';
+            }
+            clearAll();
+        }
+
+        function calculate() {
+            let finalDesi = 0;
+            let isValid = false;
+
+            const w = parseFloat(document.getElementById('width').value) || 0;
+            const l = parseFloat(document.getElementById('length').value) || 0;
+            const h = parseFloat(document.getElementById('height').value) || 0;
+            const manDesi = parseFloat(document.getElementById('manualDesi').value) || 0;
+
+            if (currentMode === 'dimensions') {
+                if (w > 0 && l > 0 && h > 0) {
+                    finalDesi = (w * l * h) / DESI_DIVIDER;
+                    isValid = true;
+                }
+            } else {
+                if (manDesi > 0) {
+                    finalDesi = manDesi;
+                    isValid = true;
+                }
+            }
+
+            const resultArea = document.getElementById('result-area');
+            const clearBtn = document.getElementById('btn-clear');
+            
+            if (!isValid) {
+                resultArea.style.display = 'none';
+                clearBtn.style.display = 'none';
+                renderPriceTable(null);
+                return;
+            }
+
+            resultArea.style.display = 'block';
+            clearBtn.style.display = 'flex';
+
+            // --- HESAPLAMA ---
+            let basePrice = 0;
+            let method = '';
+            let roundedDesi = 0;
+
+            if (finalDesi > 0 && finalDesi < 1) {
+                basePrice = priceTable[0].price;
+                method = "Dosya (0-0)";
+                roundedDesi = 0; 
+            } else {
+                roundedDesi = Math.ceil(finalDesi);
+                if (roundedDesi > 30) {
+                    basePrice = roundedDesi * OVER_30_UNIT_PRICE;
+                    method = `31+ DS Tarifesi`;
+                } else {
+                    const tier = priceTable.find(p => roundedDesi >= p.min && roundedDesi <= p.max);
+                    if (tier) {
+                        basePrice = tier.price;
+                        method = `${tier.min}-${tier.max} DS Aral\u0131\u011f\u0131`;
+                    }
+                }
+            }
+
+            const vatAmount = basePrice * VAT_RATE;
+            const totalPrice = basePrice + vatAmount;
+
+            // Sonuçlarý Yaz
+            document.getElementById('res-desi').innerText = finalDesi.toFixed(2);
+            document.getElementById('res-method').innerText = method;
+            document.getElementById('res-base').innerText = formatCurrency(basePrice);
+            document.getElementById('res-vat').innerText = formatCurrency(vatAmount);
+            document.getElementById('res-total').innerText = formatCurrency(totalPrice);
+
+            renderPriceTable(roundedDesi);
+            
+            // --- TASARRUF ANALÝZÝ (YENÝ ÖZELLÝK) ---
+            calculateSavings(roundedDesi, totalPrice);
+        }
+
+        function calculateSavings(currentRoundedDesi, currentTotalPrice) {
+            const savingsContainer = document.getElementById('savings-container');
+            let potentialDesi = 0;
+            let potentialPrice = 0;
+            let hasSaving = false;
+
+            // Eðer Desi 30'dan büyükse (Birim fiyatlý tarife)
+            if (currentRoundedDesi > 30) {
+                // 31+ Desi durumunda bir alt tam sayýya (veya 30'a) düþürmek
+                potentialDesi = currentRoundedDesi - 1;
+                
+                if (potentialDesi === 30) {
+                    // Sabit listeye geri düþüþ (Büyük tasarruf olabilir)
+                    potentialPrice = (priceTable[priceTable.length - 1].price) * (1 + VAT_RATE);
+                } else {
+                    // Sadece 1 desi azaltma
+                    potentialPrice = (potentialDesi * OVER_30_UNIT_PRICE) * (1 + VAT_RATE);
+                }
+                hasSaving = true;
+            } 
+            // Eðer Desi 1-30 arasýndaysa (Liste tarifesi)
+            else if (currentRoundedDesi > 0) {
+                // Mevcut aralýðý bul
+                const currentTierIndex = priceTable.findIndex(p => currentRoundedDesi >= p.min && currentRoundedDesi <= p.max);
+                
+                // Eðer bir alt aralýk varsa
+                if (currentTierIndex > 0) {
+                    const lowerTier = priceTable[currentTierIndex - 1];
+                    potentialDesi = lowerTier.max; // Alt aralýðýn tavaný (Hedefimiz)
+                    
+                    // Alt aralýðýn fiyatýný hesapla
+                    potentialPrice = lowerTier.price * (1 + VAT_RATE);
+                    hasSaving = true;
+                }
+            }
+
+            if (hasSaving) {
+                const diffAmount = currentTotalPrice - potentialPrice;
+                const diffDesi = (currentRoundedDesi - potentialDesi); // Basit fark
+
+                // Eðer tasarruf kayda deðerse göster (örneðin 1 TL üstü)
+                if (diffAmount > 1) {
+                    savingsContainer.style.display = 'block';
+                    document.getElementById('save-desi-diff').innerText = diffDesi;
+                    document.getElementById('save-target-desi').innerText = potentialDesi;
+                    document.getElementById('save-amount').innerText = formatCurrency(diffAmount);
+                } else {
+                    savingsContainer.style.display = 'none';
+                }
+            } else {
+                savingsContainer.style.display = 'none';
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('width').value = '';
+            document.getElementById('length').value = '';
+            document.getElementById('height').value = '';
+            document.getElementById('manualDesi').value = '';
+            document.getElementById('result-area').style.display = 'none';
+            document.getElementById('btn-clear').style.display = 'none';
+            renderPriceTable(null);
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(amount);
+        }
+
+        function renderPriceTable(currentDesi) {
+            const tbody = document.getElementById('price-table-body');
+            tbody.innerHTML = '';
+
+            priceTable.forEach(row => {
+                const isActive = (currentDesi !== null && currentDesi > 0 && currentDesi <= 30 && currentDesi >= row.min && currentDesi <= row.max) || 
+                                 (currentDesi === 0 && row.max === 0);
+
+                const tr = document.createElement('tr');
+                if (isActive) tr.className = "bg-indigo-50";
+
+                tr.innerHTML = `
+                    <td class="p-2">${row.min} - ${row.max}</td>
+                    <td class="p-2 text-right">${formatCurrency(row.price)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            const trOver = document.createElement('tr');
+            if (currentDesi !== null && currentDesi > 30) trOver.className = "bg-indigo-50";
+            
+            trOver.innerHTML = `
+                <td class="p-2 font-medium text-slate-800">31 - 99999</td>
+                <td class="p-2 text-right text-slate-800 font-medium">10,70 TL <span class="text-[10px] text-slate-400 font-normal">(Desi Ba\u015f\u0131)</span></td>
+            `;
+            tbody.appendChild(trOver);
+        }
+    </script>
+</body>
+</html>
